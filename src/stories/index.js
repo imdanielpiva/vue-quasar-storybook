@@ -1,18 +1,26 @@
 import Vue from 'vue';
 
 import { storiesOf } from '@storybook/vue';
+import StoryRouter from 'storybook-router';
 
-// import DButton from './DButton.vue';
-import QuasarBtn from './QBtn.vue';
+import { QBtn } from 'quasar-framework';
 
-// storiesOf('DButton', module)
-//   .add('story as a component', () => ({
-//     components: { DButton },
-//     template: '<d-button label="Submit"/>'
-//   }));
-
-storiesOf('QuasarBtn', module)
-  .add('story as a component', () => ({
-    components: { QuasarBtn },
-    template: '<quasar-btn>Hi, there</quasar-btn>'
+storiesOf('Welcome', module)
+  .addDecorator(StoryRouter({},
+    {
+      initialEntry: '/',
+      routes: [
+        {
+          path: '/',
+          name: 'Welcome',
+          component: load('Welcome')
+        }
+      ]
+    }))
+  .add('Introduction', () => ({
+      template: '<router-view/>'
   }));
+
+  function load (component) {
+    return () => import(`./${component}.vue`)
+  }
