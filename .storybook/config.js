@@ -1,36 +1,32 @@
 import { configure } from '@storybook/vue';
 
 import Vue from 'vue';
-import Vuex from 'vuex'; // Vue plugins
+import Vuex from 'vuex';
 import Quasar from 'quasar-framework';
 
-import QuasarBtn from '../src/stories/QBtn.vue';
 
+import '../src/assets/style.css';
 import 'quasar-extras/material-icons';
 import 'quasar-framework/dist/quasar.mat.css';
 import 'quasar-extras/roboto-font';
+
+// helper for quasar start
+const qAppEl = document.createElement('div');
+
+qAppEl.setAttribute('id', 'q-app');
+document.getElementsByTagName('body')[0].appendChild(qAppEl);
 
 Vue.use(Vuex);
 Vue.use(Quasar);
 
 Quasar.start(() => {
-  /* eslint-disable no-new */
   new Vue({
     el: '#q-app',
     render: h => h(require('../src/App.vue').default)
-  })
+  });
 });
 
-// Import your custom components.
-
-// Install Vue plugins.
-
-// Register custom components.
-// Vue.component('quasat-btn', QuasarBtn);
-// Vue.component('d-button', DButton);
-
 function loadStories() {
-  // You can require as many stories as you need.
   require('../src/stories');
 }
 
